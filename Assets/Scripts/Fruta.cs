@@ -7,9 +7,12 @@ public class Fruta : MonoBehaviour {
 	public GameObject corte1;
 	public GameObject corte2;
 
+	public AudioClip audio;
+	GameObject fonteDeSom;
+
 	// Use this for initialization
 	void Start () {
-		
+		fonteDeSom = GameObject.FindGameObjectWithTag("SomCorteFruta");
 	}
 	
 	// Update is called once per frame
@@ -19,6 +22,10 @@ public class Fruta : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D obj) {
 		if(obj.gameObject.tag == "Linha") {
+
+			fonteDeSom.GetComponent<AudioSource>().clip = audio;
+			fonteDeSom.GetComponent<AudioSource>().Play();
+
 			GameObject parte1 = Instantiate(corte1, transform.position, Quaternion.identity) as GameObject;
 			GameObject parte2 = Instantiate(corte2, new Vector3(transform.position.x - 2f, transform.position.y, 0), corte2.transform.rotation) as GameObject;
 

@@ -5,8 +5,10 @@ using UnityEngine;
 public class GeradorDeFrutas : MonoBehaviour {
 
 	public GameObject melancia;
+	public GameObject bomba;
 	public float tamanhoDaTela;
 	public float forca;
+	
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +26,9 @@ public class GeradorDeFrutas : MonoBehaviour {
 
 	void GerarGrupoDeFrutas() {
 		StartCoroutine("GerarFruta");
+		if (Random.Range(0, 6) > 2) {
+			GerarBomba();
+		}
 	}
 
 	IEnumerator GerarFruta() {
@@ -35,5 +40,13 @@ public class GeradorDeFrutas : MonoBehaviour {
 			melanciaClone.GetComponent<Rigidbody2D>().AddTorque (Random.Range(-20f, 20f)); // Torque é uma ação de girar
 			yield return new WaitForSeconds (Random.Range(0.2f, 0.6f)); // esperando meio segundo
 		}
+	}
+
+	void GerarBomba() {
+		float aleatorio = Random.Range(-tamanhoDaTela, tamanhoDaTela); // em qual posicao da tela a melancia vai nascer
+		Vector3 posicao = new Vector3 (aleatorio, transform.position.y, 0); // definindo a variavel posicao
+		GameObject bombaClone = Instantiate(bomba, posicao, Quaternion.identity) as GameObject; // Criando a melancia e salvando a melancia na variavel clone
+		bombaClone.GetComponent<Rigidbody2D>().AddForce (new Vector2(0, forca), ForceMode2D.Impulse);
+		bombaClone.GetComponent<Rigidbody2D>().AddTorque (Random.Range(-20f, 20f)); // Torque é uma ação de girar
 	}
 }

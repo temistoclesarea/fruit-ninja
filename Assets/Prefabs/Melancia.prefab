@@ -91,6 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   corte1: {fileID: 1904933796672792, guid: e76c7cf6937bc5b41b24c8f1de166490, type: 2}
   corte2: {fileID: 1565715554589562, guid: 319004234794c8549812c3da3c400c74, type: 2}
+  audio: {fileID: 8300000, guid: 7ff78bd268f9d284d8479e9465bd36c3, type: 3}
 --- !u!212 &212961303228597200
 SpriteRenderer:
   m_ObjectHideFlags: 1

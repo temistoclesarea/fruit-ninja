@@ -7,6 +7,7 @@ public class LinhaScript : MonoBehaviour {
 	int numeroDeVertices = 0;
 	LineRenderer linha;
 	bool apertandoBotaoMouse = false;
+	public GameObject Boom;
 
 	// Use this for initialization
 	void Start () {
@@ -47,6 +48,14 @@ public class LinhaScript : MonoBehaviour {
 
 		foreach(BoxCollider2D colisor in colisoresDaLinha) {
 			Destroy (colisor);
+		}
+	}
+
+	void OnCollisionEnter2D(Collision2D obj) {
+		if(obj.gameObject.tag == "Bomba") {
+			GameObject boomClone = Instantiate(Boom, obj.transform.position, Quaternion.identity) as GameObject;
+			Destroy(boomClone, 5f);
+			Destroy(obj.gameObject);
 		}
 	}
 }
