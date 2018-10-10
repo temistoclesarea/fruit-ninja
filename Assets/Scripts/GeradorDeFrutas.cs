@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GeradorDeFrutas : MonoBehaviour {
 
@@ -8,6 +9,8 @@ public class GeradorDeFrutas : MonoBehaviour {
 	public GameObject bomba;
 	public float tamanhoDaTela;
 	public float forca;
+	public int pontuacao;
+	public Text pontuacaoTxt;
 	
 
 	// Use this for initialization
@@ -17,7 +20,7 @@ public class GeradorDeFrutas : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		pontuacaoTxt.text = pontuacao.ToString();
 	}
 
 	void Gerar() {
@@ -48,5 +51,10 @@ public class GeradorDeFrutas : MonoBehaviour {
 		GameObject bombaClone = Instantiate(bomba, posicao, Quaternion.identity) as GameObject; // Criando a melancia e salvando a melancia na variavel clone
 		bombaClone.GetComponent<Rigidbody2D>().AddForce (new Vector2(0, forca), ForceMode2D.Impulse);
 		bombaClone.GetComponent<Rigidbody2D>().AddTorque (Random.Range(-20f, 20f)); // Torque é uma ação de girar
+	}
+
+	public void Pontuar(){
+		pontuacao += 1;
+		//Debug.Log(pontuacao);
 	}
 }

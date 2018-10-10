@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LinhaScript : MonoBehaviour {
 
@@ -9,9 +10,18 @@ public class LinhaScript : MonoBehaviour {
 	bool apertandoBotaoMouse = false;
 	public GameObject Boom;
 
+	public AudioClip audio;
+	GameObject FonteDeSom;
+
+	public AudioClip audioExp;
+	GameObject FonteDeSomExp;
+
+
 	// Use this for initialization
 	void Start () {
 		linha = GetComponent<LineRenderer> ();
+		FonteDeSom = GameObject.FindGameObjectWithTag("SomLamina");
+		FonteDeSomExp = GameObject.FindGameObjectWithTag("SomExplosao");
 	}
 	
 	// Update is called once per frame
@@ -30,6 +40,8 @@ public class LinhaScript : MonoBehaviour {
 	}
 
 	void CriarLinha() {
+		FonteDeSom.GetComponent<AudioSource>().clip = audio;
+		FonteDeSom.GetComponent<AudioSource>().Play();
 		//linha.SetVertexCount(numeroDeVertices + 1);
 		linha.positionCount = numeroDeVertices + 1;
 		Vector3 posicaoDoMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -53,9 +65,20 @@ public class LinhaScript : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D obj) {
 		if(obj.gameObject.tag == "Bomba") {
+			FonteDeSomExp.GetComponent<AudioSource>().clip = audioExp;
+			FonteDeSomExp.GetComponent<AudioSource>().Play();
 			GameObject boomClone = Instantiate(Boom, obj.transform.position, Quaternion.identity) as GameObject;
 			Destroy(boomClone, 5f);
 			Destroy(obj.gameObject);
+			GameOver();
 		}
+	}
+
+	void RecarregarFase() {
+		SceneManager.LoadScene("GameOver");
+	}
+
+	void GameOver() {
+		Invoke("RecarregarFase", 1.5f); //Chama outra função depois de um certo tempo
 	}
 }

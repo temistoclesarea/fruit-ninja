@@ -10,9 +10,12 @@ public class Fruta : MonoBehaviour {
 	public AudioClip audio;
 	GameObject fonteDeSom;
 
+	GameObject gerador;
+
 	// Use this for initialization
 	void Start () {
 		fonteDeSom = GameObject.FindGameObjectWithTag("SomCorteFruta");
+		gerador = GameObject.FindGameObjectWithTag("GeradorDeFrutas");
 	}
 	
 	// Update is called once per frame
@@ -22,6 +25,7 @@ public class Fruta : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D obj) {
 		if(obj.gameObject.tag == "Linha") {
+			gerador.GetComponent<GeradorDeFrutas>().Pontuar();
 
 			fonteDeSom.GetComponent<AudioSource>().clip = audio;
 			fonteDeSom.GetComponent<AudioSource>().Play();

@@ -8,6 +8,9 @@ TagManager:
   - Bomba
   - Linha
   - SomCorteFruta
+  - SomExplosao
+  - SomLamina
+  - GeradorDeFrutas
   layers:
   - Default
   - TransparentFX
