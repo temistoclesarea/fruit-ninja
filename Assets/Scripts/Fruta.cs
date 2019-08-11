@@ -7,7 +7,7 @@ public class Fruta : MonoBehaviour {
 	public GameObject corte1;
 	public GameObject corte2;
 
-	public AudioClip audio;
+	public AudioClip som;
 	GameObject fonteDeSom;
 
 	GameObject gerador;
@@ -27,7 +27,7 @@ public class Fruta : MonoBehaviour {
 		if(obj.gameObject.tag == "Linha") {
 			gerador.GetComponent<GeradorDeFrutas>().Pontuar();
 
-			fonteDeSom.GetComponent<AudioSource>().clip = audio;
+			fonteDeSom.GetComponent<AudioSource>().clip = som;
 			fonteDeSom.GetComponent<AudioSource>().Play();
 
 			GameObject parte1 = Instantiate(corte1, transform.position, Quaternion.identity) as GameObject;
